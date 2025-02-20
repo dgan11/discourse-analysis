@@ -1,6 +1,8 @@
 # Discourse Data Analysis
 
 A Jupyter Book site for analyzing discourse forum data
+https://dgan11.github.io/discourse-analysis/intro.html
+
 
 ## 🚀 Quick Start
 
