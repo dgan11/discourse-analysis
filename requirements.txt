@@ -11,3 +11,10 @@ requests
 python-dotenv
 mkdocs-material  # for documentation/blog 
 jupyter-book 
+textblob>=0.17.1 
+transformers>=4.30.0
+torch>=2.0.0
+sentence-transformers>=2.2.2
+datasets>=2.14.0 
+torch  # for sentiment analysis
+transformers  # for Cardiff NLP model
