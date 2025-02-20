@@ -1,6 +1,6 @@
 # Discourse Data Analysis
 
-A Jupyter Book site for analyzing discourse forum data.
+A Jupyter Book site for analyzing discourse forum data
 
 ## 🚀 Quick Start
 
