@@ -1,0 +1,12 @@
+jupyter
+pandas
+numpy
+matplotlib
+seaborn
+datasets
+nomic
+playwright
+beautifulsoup4
+requests
+python-dotenv
+mkdocs-material  # for documentation/blog 

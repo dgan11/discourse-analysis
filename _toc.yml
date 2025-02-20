@@ -1,0 +1,7 @@
+format: jb-book
+root: intro
+chapters:
+- file: notebooks/00_basics
+  title: Python Basics
+- file: notebooks/01_data_collection
+  title: Data Collection 

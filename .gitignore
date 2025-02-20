@@ -1,0 +1,34 @@
+# Jupyter Book build files
+_build/
+.jupyter_cache/
+.ipynb_checkpoints
+
+# Python virtual environments
+venv/
+env/
+.env
+.venv/
+cursor-analysis/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Data files (if you have any)
+data/*.json
+data/*.jsonl
+data/*.csv
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints
+*/.ipynb_checkpoints/* 

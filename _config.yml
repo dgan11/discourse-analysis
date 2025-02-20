@@ -1,0 +1,24 @@
+title: Discourse Data Analysis
+author: David Gan
+execute:
+  execute_notebooks: force
+
+# Add GitHub buttons to your book
+html:
+  use_issues_button: true
+  use_repository_button: true
+  extra_footer: ""
+  extra_navbar: ""
+  home_page_in_navbar: true
+
+# Add your repository URL
+repository:
+  url: https://github.com/dgan11/discourse-analysis
+  branch: main
+
+# Sphinx config
+sphinx:
+  config:
+    templates_path: ["_templates"]
+    html_show_copyright: false
+    html_show_sphinx: false
