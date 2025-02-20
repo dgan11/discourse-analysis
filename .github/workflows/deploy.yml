@@ -19,7 +19,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
-        pip install jupyter-book ghp-pages
+        pip install jupyter-book
 
     - name: Build book
       run: |
@@ -29,4 +29,5 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./_build/html 
+        publish_dir: ./_build/html
+        force_orphan: true 
