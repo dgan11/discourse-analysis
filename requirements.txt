@@ -10,3 +10,5 @@ beautifulsoup4
 requests
 python-dotenv
 mkdocs-material  # for documentation/blog 
+jupyter-book
+ghp-pages 
