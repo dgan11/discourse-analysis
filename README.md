@@ -15,6 +15,7 @@ cd discourse-analysis
 2. Install dependencies:
 ```bash
 pip install jupyter-book
+pip install -r requirements.txt
 ```
 ### 📝 Making Changes
 

@@ -3,7 +3,7 @@ pandas
 numpy
 matplotlib
 seaborn
-datasets
+datasets>=2.14.0
 nomic
 playwright
 beautifulsoup4
@@ -12,10 +12,6 @@ python-dotenv
 mkdocs-material  # for documentation/blog 
 jupyter-book 
 textblob>=0.17.1 
-transformers>=4.30.0
-torch>=2.0.0
+transformers>=4.30.0  # for Cardiff NLP model
+torch>=2.0.0  # for sentiment analysis
 sentence-transformers>=2.2.2
-datasets>=2.14.0 
-torch  # for sentiment analysis
-transformers  # for Cardiff NLP model
-text-embeddings-inference>=0.6.0  # for running embeddings locally
