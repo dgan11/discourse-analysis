@@ -1,0 +1,2 @@
+.venv/lib/python3.11/site-packages/huggingface_hub/templates/*
+.venv/lib/python3.11/site-packages/sentence_transformers/model_card_template.md 
