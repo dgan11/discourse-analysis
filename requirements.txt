@@ -18,3 +18,4 @@ sentence-transformers>=2.2.2
 datasets>=2.14.0 
 torch  # for sentiment analysis
 transformers  # for Cardiff NLP model
+text-embeddings-inference>=0.6.0  # for running embeddings locally

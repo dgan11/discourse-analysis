@@ -22,7 +22,7 @@ Here's a set of small, digestible steps:
    - Compute average sentiment over time.
 
 4. **Vector Embeddings**  
-   - Use a library (e.g., sentence-transformers or openai) to embed posts.  
+   - Use a library to embed posts.  
    - Investigate similarity or clustering if relevant.
 
 5. **Validation**  
