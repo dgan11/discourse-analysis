@@ -37,6 +37,11 @@ discourse-analysis/
 2. Update `_toc.yml` to include new pages
 3. Run and build the book (see below)
 
+### Data Scraping Discourse
+```bash
+python scrape_discourse.py
+``` 
+
 ### 🔨 Building the Book
 
 1. Execute all notebooks:
