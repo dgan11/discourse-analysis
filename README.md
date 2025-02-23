@@ -39,7 +39,8 @@ discourse-analysis/
 
 ### Data Scraping Discourse
 ```bash
-python scrape_discourse.py
+python scripts/scrape_discourse.py # scrape a category of discussions
+python scripts/combine_json.py     # combine the json files into a single file
 ``` 
 
 ### 🔨 Building the Book
