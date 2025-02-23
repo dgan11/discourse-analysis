@@ -16,25 +16,28 @@ import hashlib
 import pickle
 
 # Configuration
-CATEGORY = "feedback"  # Options: "bug-report" or "feedback"
-PAGE_COUNT = 28 
+CATEGORY = "how-to"  # Options: "bug-report" or "feedback"
+PAGE_COUNT = 8
 PAGE_SIZE = 100     
 MAX_RETRIES = 3  # Number of retries for failed fetches
 RETRY_DELAY = 2  # Seconds between retries
-RATE_LIMIT = 5  # requests per second
-BATCH_SIZE = 5  # Number of concurrent requests
+
+# Rate Limiting configurations so Discourse doesn't block us
+RATE_LIMIT = 2  # requests per second
+BATCH_SIZE = 2  # Number of concurrent requests
+USE_CACHE = False  # Set to False to disable caching
 
 # Base URLs and Categories
 DISCOURSE_BASE = "https://forum.cursor.com"
 CATEGORIES = {
-    "site-feedback": 2,
-    "general": 4, # "discussion" on discourse
-    "feature-requests": 5,
-    "bug-report": 6,
-    "feedback": 7,
-    "how-to": 8,
-    "showcase": 9,
-    "announcements": 11,
+    "site-feedback": 2, # 1 page ✔️
+    "general": 4, # 44 pages | "discussion" on discourse
+    "feature-requests": 5, # 12 pages
+    "bug-report": 6, #28 pages
+    "feedback": 7, #3 pages ✔️
+    "how-to": 8, # 8 pages ✔️
+    "showcase": 9, # 1 page ✔️
+    "announcements": 11, # 1 page ✔️
 }
 
 """
@@ -62,8 +65,8 @@ class Cache:
         """Get from cache or fetch and cache"""
         cache_path = self._get_cache_path(url)
         
-        # Check cache
-        if cache_path.exists():
+        # Check cache if enabled
+        if USE_CACHE and cache_path.exists():
             with open(cache_path, 'rb') as f:
                 timestamp, data = pickle.load(f)
                 if datetime.now() - timestamp < self.expire_after:
@@ -74,8 +77,9 @@ class Cache:
         print(f"Fetching {url}")
         async with session.get(url, **kwargs) as response:
             data = await response.json()
-            with open(cache_path, 'wb') as f:
-                pickle.dump((datetime.now(), data), f)
+            if USE_CACHE:  # Only cache if enabled
+                with open(cache_path, 'wb') as f:
+                    pickle.dump((datetime.now(), data), f)
             return data
 
 # Initialize cache
