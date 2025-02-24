@@ -16,8 +16,8 @@ import hashlib
 import pickle
 
 # Configuration
-CATEGORY = "how-to"  # Options: "bug-report" or "feedback"
-PAGE_COUNT = 8
+CATEGORY = "general"  # Options: "bug-report" or "feedback"
+PAGE_COUNT = 44
 PAGE_SIZE = 100     
 MAX_RETRIES = 3  # Number of retries for failed fetches
 RETRY_DELAY = 2  # Seconds between retries
@@ -30,14 +30,14 @@ USE_CACHE = False  # Set to False to disable caching
 # Base URLs and Categories
 DISCOURSE_BASE = "https://forum.cursor.com"
 CATEGORIES = {
-    "site-feedback": 2, # 1 page ✔️
+    "site-feedback": 2, # 1 page 
     "general": 4, # 44 pages | "discussion" on discourse
     "feature-requests": 5, # 12 pages
     "bug-report": 6, #28 pages
-    "feedback": 7, #3 pages ✔️
-    "how-to": 8, # 8 pages ✔️
-    "showcase": 9, # 1 page ✔️
-    "announcements": 11, # 1 page ✔️
+    "feedback": 7, #3 pages
+    "how-to": 8, # 8 pages
+    "showcase": 9, # 1 page
+    "announcements": 11, # 1 page
 }
 
 """

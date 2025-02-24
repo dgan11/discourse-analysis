@@ -3,7 +3,7 @@
 # Set these values before running the script
 """
 
-FILE_PREFIX = "med"  # Prefix for files to combine
+FILE_PREFIX = "full"  # Prefix for files to combine
 # ---------------------------
 
 import json
