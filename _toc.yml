@@ -2,8 +2,6 @@ format: jb-book
 root: intro
 chapters:
 - file: notebooks/01_data_collection
-  title: Data Collection 
-- file: notebooks/02_mini_analysis
-  title: Mini Analysis 
+  title: Data Collection
 - file: notebooks/04_full_analysis
-  title: Full Analysis
+  title: Cursor Forum Analysis
