@@ -1,0 +1,1440 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Cursor Forum Data Analysis &#8212; Discourse Analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/04_full_analysis';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Data Collection" href="01_data_collection.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Discourse Analysis</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Intro
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_data_collection.html">Data Collection</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Cursor Forum Analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/dgan11/discourse-analysis" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/dgan11/discourse-analysis/issues/new?title=Issue%20on%20page%20%2Fnotebooks/04_full_analysis.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/04_full_analysis.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Cursor Forum Data Analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sentiment-analysis">Sentiment Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-embeddings">Vector Embeddings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-search">Vector Search</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminary-data-analysis">Preliminary Data Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#volume-of-posts-over-time">Volume of Posts Over Time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#average-sentiment-over-time">Average Sentiment Over Time</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="cursor-forum-data-analysis">
+<h1>Cursor Forum Data Analysis<a class="headerlink" href="#cursor-forum-data-analysis" title="Link to this heading">#</a></h1>
+<p>inspired by <a class="reference external" href="https://news.ycombinator.com/item?id=39852219">this</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Imports</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bs4</span><span class="w"> </span><span class="kn">import</span> <span class="n">BeautifulSoup</span>  <span class="c1"># Added for HTML cleaning</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define category mapping</span>
+<span class="n">CATEGORY_MAP</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;site-feedback&#39;</span><span class="p">,</span>
+    <span class="mi">4</span><span class="p">:</span> <span class="s1">&#39;general&#39;</span><span class="p">,</span>
+    <span class="mi">5</span><span class="p">:</span> <span class="s1">&#39;feature-request&#39;</span><span class="p">,</span>
+    <span class="mi">6</span><span class="p">:</span> <span class="s1">&#39;bug-report&#39;</span><span class="p">,</span>
+    <span class="mi">7</span><span class="p">:</span> <span class="s1">&#39;feedback&#39;</span><span class="p">,</span>
+    <span class="mi">8</span><span class="p">:</span> <span class="s1">&#39;help&#39;</span><span class="p">,</span>
+    <span class="mi">9</span><span class="p">:</span> <span class="s1">&#39;showcase&#39;</span><span class="p">,</span>
+    <span class="mi">11</span><span class="p">:</span> <span class="s1">&#39;announcements&#39;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read the bug report data</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../data/full_data_2025_02_23_17:27.json&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="c1"># Create lists to store the extracted data</span>
+<span class="n">posts</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Process each discussion</span>
+<span class="k">for</span> <span class="n">thread</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;discussions&#39;</span><span class="p">]:</span>
+    <span class="c1"># Discussion-level features (shared across all posts in thread)</span>
+    <span class="n">discussion_features</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;post_discussion_id&#39;</span><span class="p">:</span> <span class="n">thread</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;post_discussion_title&#39;</span><span class="p">:</span> <span class="n">thread</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;post_discussion_created_at&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">thread</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;created_at&#39;</span><span class="p">)),</span>
+        <span class="s1">&#39;post_discussion_views&#39;</span><span class="p">:</span> <span class="n">thread</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;views&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;post_discussion_reply_count&#39;</span><span class="p">:</span> <span class="n">thread</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;posts_count&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;post_discussion_like_count&#39;</span><span class="p">:</span> <span class="n">thread</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;like_count&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;post_discussion_participant_count&#39;</span><span class="p">:</span> <span class="n">thread</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;participant_count&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;post_discussion_word_count&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">thread</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;word_count&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
+        <span class="s1">&#39;post_category_id&#39;</span><span class="p">:</span> <span class="n">thread</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;category_id&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;post_category_name&#39;</span><span class="p">:</span> <span class="n">CATEGORY_MAP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">thread</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;category_id&#39;</span><span class="p">)),</span>
+        <span class="s1">&#39;post_discussion_tags&#39;</span><span class="p">:</span> <span class="n">thread</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tags&#39;</span><span class="p">,</span> <span class="p">[]),</span>
+        <span class="s1">&#39;post_discussion_url&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;https://forum.cursor.com/t/</span><span class="si">{</span><span class="n">thread</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;slug&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">thread</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+    
+    <span class="c1"># Extract tags (up to 4)</span>
+    <span class="n">tags</span> <span class="o">=</span> <span class="n">thread</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tags&#39;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+        <span class="n">discussion_features</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;tag</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tags</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">tags</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+        
+    <span class="c1"># Post-level features</span>
+    <span class="k">for</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">thread</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;post_stream&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="p">[]):</span>
+        <span class="n">post_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="o">**</span><span class="n">discussion_features</span><span class="p">,</span>  <span class="c1"># Include all discussion features</span>
+            <span class="s1">&#39;post_id&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;post_author&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;post_author_id&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;post_created_at&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;created_at&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;post_content&#39;</span><span class="p">:</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">post</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cooked&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_text</span><span class="p">(),</span>
+            <span class="s1">&#39;post_content_raw&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cooked&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;post_read_count&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reads&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+            <span class="s1">&#39;post_reply_count&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reply_count&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+            <span class="s1">&#39;post_number&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;post_number&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;accepted_answer_post&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">post</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;accepted_answer&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)),</span>
+            <span class="s1">&#39;post_url&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;https://forum.cursor.com/t/</span><span class="si">{</span><span class="n">thread</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;slug&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">thread</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">post</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;post_number&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">posts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">post_data</span><span class="p">)</span>
+            
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">posts</span><span class="p">)</span>
+
+<span class="c1"># Display basic information about the dataset</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dataset Info:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of discussions: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;discussions&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of posts: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">DataFrame Head:&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Read the bug report data</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../data/full_data_2025_02_23_17:27.json&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># Create lists to store the extracted data</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.9.21/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py:310,</span> in <span class="ni">_modified_open</span><span class="nt">(file, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">303</span> <span class="k">if</span> <span class="n">file</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}:</span>
+<span class="g g-Whitespace">    </span><span class="mi">304</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">305</span>         <span class="sa">f</span><span class="s2">&quot;IPython won&#39;t let you open fd=</span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s2"> by default &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">306</span>         <span class="s2">&quot;as it is likely to crash IPython. If you know what you are doing, &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">307</span>         <span class="s2">&quot;you can use builtins&#39; open.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">308</span>     <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">310</span> <span class="k">return</span> <span class="n">io_open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;../data/full_data_2025_02_23_17:27.json&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print summary stats</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Dataset Summary ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total posts: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total discussions: </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;post_discussion_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total users: </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;post_author_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Date range: </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;post_created_at&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;post_created_at&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Dataset Summary ===
+Total posts: 37194
+Total discussions: 9401
+Total users: 9885
+
+Date range: 2023-08-21T22:09:03.673Z to 2025-02-23T23:43:36.361Z
+</pre></div>
+</div>
+</div>
+</div>
+<section id="sentiment-analysis">
+<h2>Sentiment Analysis<a class="headerlink" href="#sentiment-analysis" title="Link to this heading">#</a></h2>
+<p>Using Twitter-roBERTa-base for sentiment analysis, we generated a post_sentiment label (negative, positive, neutral) and post_sentiment_score confidence score for each post.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">pipeline</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm.notebook</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_sentiment_batch</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">512</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analyze sentiment of texts in batches using CardiffNLP Twitter RoBERTa model.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        texts: List of texts to analyze</span>
+<span class="sd">        batch_size: Number of texts to process at once</span>
+<span class="sd">        max_length: Maximum sequence length (will truncate longer sequences)</span>
+<span class="sd">    Returns: List of dictionaries with sentiment scores</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Initialize the model (will download on first run)</span>
+    <span class="n">sentiment_task</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span>
+        <span class="s2">&quot;sentiment-analysis&quot;</span><span class="p">,</span>
+        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;cardiffnlp/twitter-roberta-base-sentiment-latest&quot;</span><span class="p">,</span>
+        <span class="n">tokenizer</span><span class="o">=</span><span class="s2">&quot;cardiffnlp/twitter-roberta-base-sentiment-latest&quot;</span><span class="p">,</span>
+        <span class="n">device</span><span class="o">=</span><span class="mi">0</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>  <span class="c1"># Use GPU if available</span>
+        <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">max_length</span><span class="o">=</span><span class="n">max_length</span>
+    <span class="p">)</span>
+    
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Process in batches with progress bar</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">texts</span><span class="p">),</span> <span class="n">batch_size</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Analyzing sentiments&quot;</span><span class="p">):</span>
+        <span class="n">batch</span> <span class="o">=</span> <span class="n">texts</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">batch_size</span><span class="p">]</span>
+        <span class="c1"># Clean text</span>
+        <span class="n">batch</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">t</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">t</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;@&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;@user&#39;</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()])[:</span><span class="n">max_length</span><span class="p">]</span> 
+            <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">batch</span>
+        <span class="p">]</span>
+        <span class="n">batch</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">t</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">t</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;http&#39;</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()])[:</span><span class="n">max_length</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">batch</span>
+        <span class="p">]</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">batch_results</span> <span class="o">=</span> <span class="n">sentiment_task</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">batch_results</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error in batch </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="c1"># Add neutral sentiment for failed items</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">extend</span><span class="p">([{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;neutral&#39;</span><span class="p">,</span> <span class="s1">&#39;score&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">}</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">batch</span><span class="p">))])</span>
+                
+    <span class="k">return</span> <span class="n">results</span>
+
+<span class="c1"># Apply optimized sentiment analysis</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Analyzing sentiments with batching and truncation...&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;sentiment&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_sentiment_batch</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;post_content&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+<span class="c1"># Extract sentiment labels and scores</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;sentiment_label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;sentiment&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;sentiment_score&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;sentiment&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Analyzing sentiments with batching and truncation...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Some weights of the model checkpoint at cardiffnlp/twitter-roberta-base-sentiment-latest were not used when initializing RobertaForSequenceClassification: [&#39;roberta.pooler.dense.bias&#39;, &#39;roberta.pooler.dense.weight&#39;]
+- This IS expected if you are initializing RobertaForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Device set to use cpu
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "02cb382006244f859c85adb67c52d987", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print sentiment distribution</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Sentiment Distribution:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sentiment_label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+
+<span class="c1"># Visualize results</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;sentiment_label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribution of Sentiments&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Sentiment&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sentiment Distribution:
+sentiment_label
+neutral     18952
+negative    11796
+positive     6446
+Name: count, dtype: int64
+</pre></div>
+</div>
+<img alt="../_images/6f224658766861ac2c8bda9fabe1a2d7c3c19fa4e18c3bb0342b695cf3cbdbee.png" src="../_images/6f224658766861ac2c8bda9fabe1a2d7c3c19fa4e18c3bb0342b695cf3cbdbee.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get top and bottom posts by sentiment</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Top 5 Most Positive Discussions ===&quot;</span><span class="p">)</span>
+<span class="n">top_posts</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;post_discussion_title&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span>
+    <span class="s1">&#39;sentiment_score&#39;</span><span class="p">:</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;post_discussion_views&#39;</span><span class="p">:</span> <span class="s1">&#39;first&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;post_discussion_reply_count&#39;</span><span class="p">:</span> <span class="s1">&#39;first&#39;</span>
+<span class="p">})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;sentiment_score&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">top_posts</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Top 5 Most Negative Discussions ===&quot;</span><span class="p">)</span>
+<span class="n">bottom_posts</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;post_discussion_title&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span>
+    <span class="s1">&#39;sentiment_score&#39;</span><span class="p">:</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;post_discussion_views&#39;</span><span class="p">:</span> <span class="s1">&#39;first&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;post_discussion_reply_count&#39;</span><span class="p">:</span> <span class="s1">&#39;first&#39;</span>
+<span class="p">})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;sentiment_score&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">bottom_posts</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Top 5 Most Positive Discussions ===
+                                                                                               sentiment_score  post_discussion_views  post_discussion_reply_count
+post_discussion_title                                                                                                                                             
+I stopped starting my coding days with checking Cursor forum. Good job with the latest patch!         0.984200                    234                            1
+Short introduction - Hello folks                                                                      0.983756                     59                            1
+Appreciation feedback                                                                                 0.983639                     61                            4
+Joining Cursor as an SDE                                                                              0.983206                    229                            1
+Does Cursor offer a Business Plan API for Cursor Chat functionality                                   0.983114                     59                            1
+
+=== Top 5 Most Negative Discussions ===
+                                                                              sentiment_score  post_discussion_views  post_discussion_reply_count
+post_discussion_title                                                                                                                            
+Learning to code with AI                                                             0.392078                    810                            1
+VertexAI (Gemini) and Composer                                                       0.392228                      7                            1
+I use sweetPad to build &amp; run xcode ios project , but breakpoint is not work         0.401299                     88                            1
+The debug panel button area switching status is abnormal.                            0.401299                     20                            1
+Command &#39;WSL: Connect to WSL using Distro..&#39; resulted in error                       0.401299                     35                            1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create cross-tabulation using category_id</span>
+<span class="n">sentiment_by_category</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span>
+    <span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;post_category_name&#39;</span><span class="p">],</span>
+    <span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sentiment_label&#39;</span><span class="p">],</span>
+    <span class="n">normalize</span><span class="o">=</span><span class="s1">&#39;index&#39;</span>  <span class="c1"># This normalizes by row (category)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sentiment Distribution by Category Name:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sentiment_by_category</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sentiment Distribution by Category Name:
+sentiment_label     negative   neutral  positive
+post_category_name                              
+announcements       0.000000  1.000000  0.000000
+bug-report          0.412713  0.481025  0.106262
+feature-request     0.163103  0.486020  0.350877
+feedback            0.335683  0.434361  0.229956
+general             0.303986  0.528420  0.167594
+help                0.232713  0.580906  0.186381
+showcase            0.097421  0.415473  0.487106
+site-feedback       0.209677  0.548387  0.241935
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="vector-embeddings">
+<h2>Vector Embeddings<a class="headerlink" href="#vector-embeddings" title="Link to this heading">#</a></h2>
+<p>For calculating vector embeddings, <a class="reference external" href="https://huggingface.co/nomic-ai/nomic-embed-text-v1.5">Nomic Embed-Text v1.5</a> was ran locally with the help of <a class="reference external" href="https://github.com/huggingface/text-embeddings-inference">text-embeddings-inference</a>. Because of it’s Matryoshka resizable nature, it’s possible to use these embeddings in a bunch of future applications.</p>
+<p>Nomic Embed v1.5 was largely selected due to it’s large context length.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import additional libraries for embeddings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sentence_transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">SentenceTransformer</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+<span class="c1"># Set basic plot style</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">)</span>
+
+<span class="c1"># Cell - Analyze content length distribution</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;post_content_raw_length&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;post_content_raw&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">len</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;post_content_raw_length&#39;</span><span class="p">],</span>
+    <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> 
+    <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+    <span class="n">cumulative</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">stat</span><span class="o">=</span><span class="s1">&#39;density&#39;</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;CDF of Length Distribution of post_content_raw&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Length of post_content_raw&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Cumulative Density&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Cell - Generate embeddings</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_embeddings</span><span class="p">(</span><span class="n">texts</span><span class="p">):</span>
+    <span class="c1"># Initialize the model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">SentenceTransformer</span><span class="p">(</span><span class="s1">&#39;all-MiniLM-L6-v2&#39;</span><span class="p">)</span>  <span class="c1"># Fast and good quality model</span>
+    
+    <span class="c1"># Generate embeddings</span>
+    <span class="n">embeddings</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+        <span class="n">texts</span><span class="p">,</span>
+        <span class="n">show_progress_bar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span>  <span class="c1"># Adjust based on your memory</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">embeddings</span><span class="p">,</span> <span class="n">embeddings</span><span class="p">,</span> <span class="n">embeddings</span>
+
+<span class="c1"># Generate embeddings for our content</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generating embeddings... this may take a few minutes...&quot;</span><span class="p">)</span>
+<span class="n">cluster_emb</span><span class="p">,</span> <span class="n">class_emb</span><span class="p">,</span> <span class="n">search_emb</span> <span class="o">=</span> <span class="n">generate_embeddings</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;post_content_raw&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+<span class="c1"># Add embeddings to dataframe</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;post_content_cluster_embedding&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cluster_emb</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;post_content_classification_embedding&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">class_emb</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;post_content_search_document_embedding&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">search_emb</span>
+
+<span class="c1"># Display sample of embeddings</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Sample of generated embeddings:&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[[</span>
+    <span class="s1">&#39;post_content_cluster_embedding&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;post_content_classification_embedding&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;post_content_search_document_embedding&#39;</span>
+<span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/635b1c50e32c494d193329f846c45402398558663d7f090ab26574ee783c276b.png" src="../_images/635b1c50e32c494d193329f846c45402398558663d7f090ab26574ee783c276b.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating embeddings... this may take a few minutes...
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "c2ef0761b7584645a8d217a43dd809e7", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample of generated embeddings:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>post_content_cluster_embedding</th>
+      <th>post_content_classification_embedding</th>
+      <th>post_content_search_document_embedding</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>[-0.07126212120056152, -0.06342405825853348, -...</td>
+      <td>[-0.07126212120056152, -0.06342405825853348, -...</td>
+      <td>[-0.07126212120056152, -0.06342405825853348, -...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>[0.014518680982291698, 0.005969285499304533, 0...</td>
+      <td>[0.014518680982291698, 0.005969285499304533, 0...</td>
+      <td>[0.014518680982291698, 0.005969285499304533, 0...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>[-0.07926061749458313, 0.06766100227832794, 0....</td>
+      <td>[-0.07926061749458313, 0.06766100227832794, 0....</td>
+      <td>[-0.07926061749458313, 0.06766100227832794, 0....</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>[-0.00010644132271409035, 0.03789800405502319,...</td>
+      <td>[-0.00010644132271409035, 0.03789800405502319,...</td>
+      <td>[-0.00010644132271409035, 0.03789800405502319,...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>[-0.06011117622256279, -0.007468045223504305, ...</td>
+      <td>[-0.06011117622256279, -0.007468045223504305, ...</td>
+      <td>[-0.06011117622256279, -0.007468045223504305, ...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="vector-search">
+<h2>Vector Search<a class="headerlink" href="#vector-search" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import libraries for vector search</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics.pairwise</span><span class="w"> </span><span class="kn">import</span> <span class="n">cosine_similarity</span>
+
+<span class="c1"># Function to find similar posts</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">find_similar_posts</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">query_id</span><span class="p">,</span> <span class="n">n_results</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find similar posts using cosine similarity of embeddings</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        df: DataFrame containing the posts</span>
+<span class="sd">        query_id: ID of the post to find similar posts to</span>
+<span class="sd">        n_results: Number of similar posts to return (including the query post)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Get the query post&#39;s embedding</span>
+    <span class="n">query_embedding</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;post_id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">query_id</span><span class="p">][</span><span class="s1">&#39;post_content_search_document_embedding&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="c1"># Convert all embeddings to numpy array for faster computation</span>
+    <span class="n">all_embeddings</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;post_content_search_document_embedding&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+    
+    <span class="c1"># Calculate cosine similarity</span>
+    <span class="n">similarities</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">([</span><span class="n">query_embedding</span><span class="p">],</span> <span class="n">all_embeddings</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="c1"># Get indices of most similar posts</span>
+    <span class="n">most_similar_indices</span> <span class="o">=</span> <span class="n">similarities</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[</span><span class="o">-</span><span class="n">n_results</span><span class="p">:][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="c1"># Get the similar posts</span>
+    <span class="n">similar_posts</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">most_similar_indices</span><span class="p">]</span>
+    
+    <span class="c1"># Add similarity scores</span>
+    <span class="n">similar_posts</span> <span class="o">=</span> <span class="n">similar_posts</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">similar_posts</span><span class="p">[</span><span class="s1">&#39;similarity_score&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">similarities</span><span class="p">[</span><span class="n">most_similar_indices</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">similar_posts</span>
+
+<span class="c1"># Example usage - let&#39;s find posts similar to the first post in our dataset</span>
+<span class="n">query_post_id</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;post_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Using first post as example</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Query post:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Title:&quot;</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;post_id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">query_post_id</span><span class="p">][</span><span class="s1">&#39;post_discussion_title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Content:&quot;</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;post_id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">query_post_id</span><span class="p">][</span><span class="s1">&#39;post_content&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">200</span><span class="p">],</span> <span class="s2">&quot;...</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Similar posts:&quot;</span><span class="p">)</span>
+<span class="n">similar_posts</span> <span class="o">=</span> <span class="n">find_similar_posts</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">query_post_id</span><span class="p">,</span> <span class="n">n_results</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">similar_posts</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Title: </span><span class="si">{</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;post_discussion_title&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Similarity score: </span><span class="si">{</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;similarity_score&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Content preview: </span><span class="si">{</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;post_content&#39;</span><span class="p">][:</span><span class="mi">150</span><span class="p">]</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Query post:
+Title: Update: o3-mini pricing
+Content: we’ve updated the pricing for o3-mini to be like haiku
+
+1/3 fast request
+$0.01 per request (usage based)
+
+you can find all available models here: Cursor – Models ...
+
+
+Similar posts:
+
+Title: Update: o3-mini pricing
+Similarity score: 1.000
+Content preview: we’ve updated the pricing for o3-mini to be like haiku
+
+1/3 fast request
+$0.01 per request (usage based)
+
+you can find all available models here: Curs...
+
+Title: O3-mini support
+Similarity score: 0.760
+Content preview: It doesn’t seem to be out at the time of writing this. Once it is (and the pricing is clear) the Cursor team will look into adding o3-mini support....
+
+Title: Add support for o3-mini-high
+Similarity score: 0.755
+Content preview: I recommend to indicate that it is the high reasoning mode in
+
+Cursor – Models
+Update: o3-mini pricing
+and in the Cursor app
+
+Because the ‘o3-mini’ mo...
+
+Title: Please add OpenAI&#39;s o3-mini
+Similarity score: 0.740
+Content preview: o3-mini is not yet available via the API as far as I know, but once it is, and it’s pricing is clear, we will look at adding it to Cursor....
+
+Title: Version of 03 mini?
+Similarity score: 0.725
+Content preview: According to our docs (Cursor – Models), o3-mini counts as 1/3 of a fast premium request and costs $0.01 per request. The model always has high reason...
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function to search posts using custom text</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">search_posts_by_text</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">query_text</span><span class="p">,</span> <span class="n">n_results</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Search posts using a text query</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        df: DataFrame containing the posts</span>
+<span class="sd">        query_text: Text to search for</span>
+<span class="sd">        n_results: Number of results to return</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Generate embedding for the query text</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">SentenceTransformer</span><span class="p">(</span><span class="s1">&#39;all-MiniLM-L6-v2&#39;</span><span class="p">)</span>
+    <span class="n">query_embedding</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encode</span><span class="p">([</span><span class="n">query_text</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="c1"># Convert all embeddings to numpy array</span>
+    <span class="n">all_embeddings</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;post_content_search_document_embedding&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+    
+    <span class="c1"># Calculate similarities</span>
+    <span class="n">similarities</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">([</span><span class="n">query_embedding</span><span class="p">],</span> <span class="n">all_embeddings</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="c1"># Get most similar posts</span>
+    <span class="n">most_similar_indices</span> <span class="o">=</span> <span class="n">similarities</span><span class="o">.</span><span class="n">argsort</span><span class="p">()[</span><span class="o">-</span><span class="n">n_results</span><span class="p">:][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="c1"># Get the similar posts</span>
+    <span class="n">similar_posts</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">most_similar_indices</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">similar_posts</span><span class="p">[</span><span class="s1">&#39;similarity_score&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">similarities</span><span class="p">[</span><span class="n">most_similar_indices</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">similar_posts</span>
+
+<span class="c1"># Example usage - search for posts about a specific topic</span>
+<span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;Billing Issues&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Searching for: &#39;</span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">&#39;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">similar_posts</span> <span class="o">=</span> <span class="n">search_posts_by_text</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">similar_posts</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Title: </span><span class="si">{</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;post_discussion_title&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Similarity score: </span><span class="si">{</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;similarity_score&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Content preview: </span><span class="si">{</span><span class="n">post</span><span class="p">[</span><span class="s1">&#39;post_content&#39;</span><span class="p">][:</span><span class="mi">150</span><span class="p">]</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Searching for: &#39;Billing Issues&#39;
+
+
+Title: Fast request charged me yearly price
+Similarity score: 0.771
+Content preview: Anybody else facing this billing issue?...
+
+Title: Bug: Reverted to Free Subscription After Subscribing to Cursor Business
+Similarity score: 0.736
+Content preview: Hey,
+Sorry you’re facing this, thanks for signing up to the business plan!
+Billing issues are all handled on the hi@cursor.com email, if you could dro...
+
+Title: Anyone else with Revolut getting payment flagged and card frozen?
+Similarity score: 0.702
+Content preview: Hey, for any billing issues, please contact us via email at hi@cursor.com as they can look into this further for you!...
+
+Title: Need Help with Subscription Issues - Unexpected Cancellation &amp; Refund
+Similarity score: 0.699
+Content preview: They contacted me via email,they said that there seems to be a sync issue between the billing system and my account status....
+
+Title: Cursor AI on blacklist at my Bank
+Similarity score: 0.693
+Content preview: Hey,
+Can you send me a message with the email address you attempted to use during billing? I will check for the transactions and see what’s going on....
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="preliminary-data-analysis">
+<h2>Preliminary Data Analysis<a class="headerlink" href="#preliminary-data-analysis" title="Link to this heading">#</a></h2>
+<p>Here, we attempt to give some basic information about the dataset and it’s features which one could potentially continue from.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Correlation Analysis</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+<span class="c1"># First, let&#39;s see what features we have</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total features:&quot;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="fm">__len__</span><span class="p">())</span>
+
+<span class="c1"># Create a copy for analysis</span>
+<span class="n">og_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Select only truly numerical columns</span>
+<span class="n">numerical_columns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;post_discussion_views&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;post_discussion_reply_count&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;post_discussion_like_count&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;post_discussion_participant_count&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;post_discussion_word_count&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;post_read_count&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;post_reply_count&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;post_number&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;accepted_answer_post&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;sentiment_score&#39;</span><span class="p">,</span>  <span class="c1"># Using the score, not the dictionary</span>
+    <span class="s1">&#39;post_content_raw_length&#39;</span>
+<span class="p">]</span>
+
+<span class="c1"># Create DataFrame with only numerical columns</span>
+<span class="n">df_numerical</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">numerical_columns</span><span class="p">]</span>
+
+<span class="c1"># Print the columns we&#39;ll analyze</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Analyzing correlations between these features:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_numerical</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+<span class="c1"># Calculate and plot correlation matrix</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">corr</span> <span class="o">=</span> <span class="n">df_numerical</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
+    <span class="n">corr</span><span class="p">,</span> 
+    <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Show correlation values</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">,</span>  <span class="c1"># Red-blue colormap</span>
+    <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>  <span class="c1"># Center the colormap at 0</span>
+    <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.2f&#39;</span><span class="p">,</span>  <span class="c1"># Show 2 decimal places</span>
+    <span class="n">square</span><span class="o">=</span><span class="kc">True</span>  <span class="c1"># Make cells square</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Correlation Heatmap of Cursor Forum Metrics&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>  <span class="c1"># Rotate x-axis labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  <span class="c1"># Adjust plot margins</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Print strongest correlations</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Strongest correlations:&quot;</span><span class="p">)</span>
+<span class="c1"># Get upper triangle of correlations</span>
+<span class="n">upper</span> <span class="o">=</span> <span class="n">corr</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">corr</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">bool</span><span class="p">))</span>
+<span class="c1"># Stack and sort</span>
+<span class="n">strongest_corr</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">upper</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="c1"># Print top 10 correlations</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">strongest_corr</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> vs </span><span class="si">{</span><span class="n">idx</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total features: 34
+
+Analyzing correlations between these features:
+[&#39;post_discussion_views&#39;, &#39;post_discussion_reply_count&#39;, &#39;post_discussion_like_count&#39;, &#39;post_discussion_participant_count&#39;, &#39;post_discussion_word_count&#39;, &#39;post_read_count&#39;, &#39;post_reply_count&#39;, &#39;post_number&#39;, &#39;accepted_answer_post&#39;, &#39;sentiment_score&#39;, &#39;post_content_raw_length&#39;]
+</pre></div>
+</div>
+<img alt="../_images/1737edb57078ea06043d9143f107f28dba1e4900e6d747d5c209d2038bcaa1d0.png" src="../_images/1737edb57078ea06043d9143f107f28dba1e4900e6d747d5c209d2038bcaa1d0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Strongest correlations:
+post_discussion_reply_count vs post_discussion_participant_count: 0.916
+post_discussion_like_count vs post_discussion_participant_count: 0.737
+post_discussion_reply_count vs post_discussion_like_count: 0.730
+post_discussion_reply_count vs post_discussion_word_count: 0.710
+post_discussion_like_count vs post_read_count: 0.664
+post_discussion_participant_count vs post_read_count: 0.618
+post_discussion_reply_count vs post_read_count: 0.617
+post_discussion_like_count vs post_discussion_word_count: 0.615
+post_discussion_participant_count vs post_discussion_word_count: 0.597
+post_discussion_reply_count vs post_number: 0.595
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="volume-of-posts-over-time">
+<h2>Volume of Posts Over Time<a class="headerlink" href="#volume-of-posts-over-time" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Time-based Sentiment Analysis</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Convert post_created_at to datetime and create year_month column</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;post_created_at&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;post_created_at&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;year_month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;post_created_at&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">to_period</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span>
+
+<span class="c1"># Count sentiment labels by month</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;negative&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;neutral&#39;</span><span class="p">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;positive&#39;</span><span class="p">:</span> <span class="s1">&#39;green&#39;</span><span class="p">}</span>
+<span class="n">sentiment_label_counts_by_month</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;year_month&#39;</span><span class="p">,</span> <span class="s1">&#39;sentiment_label&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Calculate proportions</span>
+<span class="n">total_posts_per_month</span> <span class="o">=</span> <span class="n">sentiment_label_counts_by_month</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">sentiment_label_proportions_by_month</span> <span class="o">=</span> <span class="n">sentiment_label_counts_by_month</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span>
+    <span class="n">total_posts_per_month</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+
+<span class="c1"># Create stacked bar plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">sentiment_label_counts_by_month</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span>
+    <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="n">colors</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">sentiment_label_counts_by_month</span><span class="o">.</span><span class="n">columns</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Sentiment Distribution in Cursor Forum Posts Over Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Month&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of Posts&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Sentiment&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Print some statistics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Sentiment Statistics:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total posts per month:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">total_posts_per_month</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Sentiment proportions by month:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sentiment_label_proportions_by_month</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># Calculate overall sentiment distribution</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Overall sentiment distribution:&quot;</span><span class="p">)</span>
+<span class="n">sentiment_distribution</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;sentiment_label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">sentiment</span><span class="p">,</span> <span class="n">proportion</span> <span class="ow">in</span> <span class="n">sentiment_distribution</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">sentiment</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">proportion</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/hg/xlym54ps011_3xj339xh45fr0000gn/T/ipykernel_78241/474705622.py:7: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  df[&#39;year_month&#39;] = df[&#39;post_created_at&#39;].dt.to_period(&#39;M&#39;)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 1400x800 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="../_images/15ea32eee385234f43cb7b2e368277d00a03c7e5fdb30803f0da8e7c36098d18.png" src="../_images/15ea32eee385234f43cb7b2e368277d00a03c7e5fdb30803f0da8e7c36098d18.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sentiment Statistics:
+
+Total posts per month:
+year_month
+2023-08     338
+2023-09     640
+2023-10     765
+2023-11     609
+2023-12     437
+2024-01     662
+2024-02     709
+2024-03     915
+2024-04     683
+2024-05     780
+2024-06     700
+2024-07     776
+2024-08    2093
+2024-09    3629
+2024-10    3671
+2024-11    3291
+2024-12    4071
+2025-01    6323
+2025-02    6102
+Freq: M, dtype: int64
+
+Sentiment proportions by month:
+sentiment_label  negative  neutral  positive
+year_month                                  
+2023-08              0.18     0.62      0.20
+2023-09              0.29     0.50      0.21
+2023-10              0.27     0.52      0.22
+2023-11              0.22     0.56      0.22
+2023-12              0.35     0.48      0.17
+2024-01              0.28     0.51      0.21
+2024-02              0.26     0.57      0.18
+2024-03              0.29     0.53      0.19
+2024-04              0.31     0.53      0.16
+2024-05              0.29     0.52      0.18
+2024-06              0.32     0.53      0.15
+2024-07              0.33     0.51      0.17
+2024-08              0.33     0.49      0.18
+2024-09              0.34     0.51      0.15
+2024-10              0.34     0.50      0.16
+2024-11              0.39     0.46      0.15
+2024-12              0.33     0.51      0.16
+2025-01              0.29     0.53      0.18
+2025-02              0.31     0.51      0.18
+
+Overall sentiment distribution:
+neutral: 51.0%
+negative: 31.7%
+positive: 17.3%
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="average-sentiment-over-time">
+<h2>Average Sentiment Over Time<a class="headerlink" href="#average-sentiment-over-time" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Average Sentiment Over Time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.dates</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mdates</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Reset index if it was set before</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="c1"># Convert to datetime if not already</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;post_created_at&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;post_created_at&#39;</span><span class="p">])</span>
+
+<span class="c1"># Set the post_created_at column as the index</span>
+<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;post_created_at&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Create monthly sentiment counts</span>
+<span class="n">monthly_sentiment</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;ME&#39;</span><span class="p">)[</span><span class="s1">&#39;sentiment_label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Define colors for sentiment</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;negative&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;neutral&#39;</span><span class="p">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;positive&#39;</span><span class="p">:</span> <span class="s1">&#39;green&#39;</span><span class="p">}</span>
+
+<span class="c1"># Create the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="c1"># Plot lines for each sentiment</span>
+<span class="k">for</span> <span class="n">sentiment</span> <span class="ow">in</span> <span class="n">monthly_sentiment</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">monthly_sentiment</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> 
+        <span class="n">monthly_sentiment</span><span class="p">[</span><span class="n">sentiment</span><span class="p">],</span> 
+        <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">sentiment</span><span class="p">],</span>
+        <span class="n">label</span><span class="o">=</span><span class="n">sentiment</span><span class="p">,</span>
+        <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>  <span class="c1"># Add markers for data points</span>
+        <span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span>
+    <span class="p">)</span>
+
+<span class="c1"># Format x-axis to show Month-Year</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">mdates</span><span class="o">.</span><span class="n">DateFormatter</span><span class="p">(</span><span class="s1">&#39;%b-%Y&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">mdates</span><span class="o">.</span><span class="n">MonthLocator</span><span class="p">(</span><span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>  <span class="c1"># Show every month</span>
+
+<span class="c1"># Improve x-axis labels readability</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span><span class="o">.</span><span class="n">autofmt_xdate</span><span class="p">()</span>
+
+<span class="c1"># Add labels and title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Sentiment Trends in Cursor Forum Over Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of Posts&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Sentiment&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add grid for better readability</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="c1"># Adjust layout</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Print some insights</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Sentiment Trends Summary:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Peak months for each sentiment:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">sentiment</span> <span class="ow">in</span> <span class="n">monthly_sentiment</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">peak_month</span> <span class="o">=</span> <span class="n">monthly_sentiment</span><span class="p">[</span><span class="n">sentiment</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span>
+    <span class="n">peak_count</span> <span class="o">=</span> <span class="n">monthly_sentiment</span><span class="p">[</span><span class="n">sentiment</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">sentiment</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">peak_month</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%B %Y&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2"> with </span><span class="si">{</span><span class="n">peak_count</span><span class="si">}</span><span class="s2"> posts&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Monthly averages:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">monthly_sentiment</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/34cec92847997d32b01b2177d91a3a4238e9ace711d7f72626d3a957b3cf2e25.png" src="../_images/34cec92847997d32b01b2177d91a3a4238e9ace711d7f72626d3a957b3cf2e25.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sentiment Trends Summary:
+
+Peak months for each sentiment:
+negative: February 2025 with 1907 posts
+neutral: January 2025 with 3327 posts
+positive: January 2025 with 1169 posts
+
+Monthly averages:
+sentiment_label
+negative    620.8
+neutral     997.5
+positive    339.3
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_data_collection.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Data Collection</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sentiment-analysis">Sentiment Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-embeddings">Vector Embeddings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-search">Vector Search</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminary-data-analysis">Preliminary Data Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#volume-of-posts-over-time">Volume of Posts Over Time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#average-sentiment-over-time">Average Sentiment Over Time</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By David Gan
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
