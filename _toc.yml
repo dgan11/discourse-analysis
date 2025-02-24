@@ -5,3 +5,5 @@ chapters:
   title: Data Collection 
 - file: notebooks/02_mini_analysis
   title: Mini Analysis 
+- file: notebooks/04_full_analysis
+  title: Full Analysis
